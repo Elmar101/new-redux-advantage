@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { todoReducer, add } from '../features/todo-slice';
+import { todoReducer, add, remove, update } from '../features/todo-slice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
@@ -8,33 +8,17 @@ export const store = configureStore({
   },
 });
 
-console.log( store.getState() )
-
-
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-// custom dispatch hook
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-export { add };
 
-// https://www.youtube.com/watch?v=nViEqpgwxHE
+// actions exports
 
-// interface IPerson<T> {
-//   data: T;
-// };
+// selectors 
+const getState = (state: RootState) => state;
+const getTodoListSelector = (state: RootState) => getState(state)?.todos;
 
-
-// interface IParent {
-//   parentdata: IPerson<string>
-//   grandParentData: IPerson<number>
-//   grandParentData1: IPerson<number[]>
-//   grandParentData2: IPerson<{name: string}[]>
-// }
-
-
-
-// function keyString<T>(data: T, keys: string | string[]){
-//   if(typeof data === 'string' ){ /* executor code*/ }
-// }
+export { add, remove, update };
+export { getTodoListSelector };
