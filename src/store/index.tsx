@@ -1,10 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { todoReducer, add, remove, update } from '../features/todo-slice';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { configureStore } from "@reduxjs/toolkit";
+import {
+  todoReducer,
+  add,
+  remove,
+  update,
+  updateTitle,
+} from "../features/todo-slice";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({
   reducer: {
-    todos: todoReducer
+    todos: todoReducer,
   },
 });
 
@@ -16,9 +22,9 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 // actions exports
 
-// selectors 
+// selectors
 const getState = (state: RootState) => state;
 const getTodoListSelector = (state: RootState) => getState(state)?.todos;
 
-export { add, remove, update };
+export { add, remove, update, updateTitle };
 export { getTodoListSelector };
