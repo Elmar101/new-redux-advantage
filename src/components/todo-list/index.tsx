@@ -32,12 +32,15 @@ const TodoList = () => {
   );
   const editTitle = useCallback(
     (todoObj: Todo) => {
-      const { id, title } = todoObj ?? {};
-      setState(title);
-      boundActionCreators.updateTitle({ id, title: state });
       setIsEdit(!isEdit);
+      const { id, title } = todoObj ?? {};
+      if(isEdit) setState(title);
+      else {
+        boundActionCreators.updateTitle({ id, title: state });
+        setState(title);
+      };
     },
-    [state, boundActionCreators]
+    [state, boundActionCreators, isEdit]
   );
   return (
     <>
