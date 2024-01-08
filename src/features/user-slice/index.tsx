@@ -46,7 +46,8 @@ const initialState: UserState = {
 
 // url and request start
 export const getUsersUrl =  "https://jsonplaceholder.typicode.com/users";
-export const getUsers = (): Promise<AxiosResponse<User[]>> =>{
+
+export const getUsers = (): Promise<AxiosResponse<User[]>> => {
   return axios.get<User[]>(getUsersUrl);
 };
 // end
@@ -70,6 +71,8 @@ export const usersSlice = createSlice({
             state.loading = true;
         });
         builder.addCase(fetchUsers.fulfilled, (state, action: PayloadAction<User[]>)=>{
+          console.log({action});
+          
             state.loading = false;
             state.data = action.payload
         });   
